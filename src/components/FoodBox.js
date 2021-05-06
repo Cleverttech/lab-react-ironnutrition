@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import 'bulma/css/bulma.css';
 import Search from './Search';
 
 class FoodBox extends Component {
@@ -9,7 +8,7 @@ class FoodBox extends Component {
 
   handleChange = (e) => {
     this.setState({
-      quantity: e.target.value,
+      quantity: Number(e.target.value),
     });
   };
 
@@ -42,6 +41,7 @@ class FoodBox extends Component {
                     <div className="field has-addons">
                       <div className="control">
                         <input
+                          min={0}
                           onChange={this.handleChange}
                           className="input"
                           type="number"

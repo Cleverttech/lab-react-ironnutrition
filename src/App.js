@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import data from './foods.json';
+import 'bulma/css/bulma.css';
 import FoodBox from './components/FoodBox';
 import AddForm from './components/AddForm';
 import Total from './components/Total';
@@ -22,7 +23,7 @@ class App extends Component {
   handleAddFood = (food) => {
     this.setState({
       foods: [food, ...this.state.foods],
-      filteredBooks: [food, ...this.state.foods],
+      filteredFoods: [food, ...this.state.foods],
     });
   };
 
@@ -87,15 +88,13 @@ class App extends Component {
             <FoodBox
               foods={filteredFoods}
               onSearch={this.handleSearch}
-              onChange={this.handleChange}
               onTotal={this.handleAddTotal}
-              // filteredFoods={filteredFoods}
             />
           </div>
           <div className="column">
             <Total
               totalFoods={this.state.totalFoods}
-              onQuantity={this.state.quantity}
+              // onQuantity={this.state.quantity}
             />
           </div>
         </div>
