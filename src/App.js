@@ -5,12 +5,14 @@ import data from './foods.json';
 import FoodBox from './components/FoodBox';
 import AddForm from './components/AddForm';
 import Search from './components/Search';
+import Total from './components/Total';
 
 class App extends Component {
   state = {
     foods: data,
     filteredFoods: data,
     showForm: false,
+    totalFoods: [],
   };
 
   handleShowForm = () => {
@@ -55,27 +57,49 @@ class App extends Component {
     });
   };
 
+  //handle the stae totalBooks
+  handleAddTotal = (food, quantity) => {
+    let myFood = { ...food, quantity };
+
+    this.setState({
+      totalFoods: [myFood, ...this.state.totalFoods],
+    });
+  };
+
   render() {
     const { showForm, filteredFoods } = this.state;
 
     return (
       <div>
-        {showForm ? (
-          <AddForm onSubmit={this.handleSubmit} />
-        ) : (
-          <button
-            onClick={this.handleShowForm}
-            type="submit"
-            className="button is-primary"
-          >
-            Add new Food
-          </button>
-        )}
-        <FoodBox
-          foods={filteredFoods}
-          onSearch={this.handleSearch}
-          // filteredFoods={filteredFoods}
-        />
+        <div className="columns">
+          <div className="column is-8">
+            {showForm ? (
+              <AddForm onSubmit={this.handleSubmit} />
+            ) : (
+              <button
+                onClick={this.handleShowForm}
+                type="submit"
+                className="button is-primary"
+              >
+                Add new Food
+              </button>
+            )}
+
+            <FoodBox
+              foods={filteredFoods}
+              onSearch={this.handleSearch}
+              onChange={this.handleChange}
+              onTotal={this.handleAddTotal}
+              // filteredFoods={filteredFoods}
+            />
+          </div>
+          <div className="column">
+            <Total
+              totalFoods={this.state.totalFoods}
+              onQuantity={this.state.quantity}
+            />
+          </div>
+        </div>
       </div>
     );
   }

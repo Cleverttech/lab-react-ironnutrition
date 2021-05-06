@@ -3,8 +3,18 @@ import 'bulma/css/bulma.css';
 import Search from './Search';
 
 class FoodBox extends Component {
+  state = {
+    quantity: 0,
+  };
+
+  handleChange = (e) => {
+    this.setState({
+      quantity: e.target.value,
+    });
+  };
+
   render() {
-    const { foods } = this.props;
+    const { foods, onTotal } = this.props;
 
     return (
       <div>
@@ -31,10 +41,21 @@ class FoodBox extends Component {
                   <div className="media-right">
                     <div className="field has-addons">
                       <div className="control">
-                        <input className="input" type="number" value="1" />
+                        <input
+                          onChange={this.handleChange}
+                          className="input"
+                          type="number"
+                          placeholder="0"
+                        />
                       </div>
                       <div className="control">
-                        <button type="submit" className="button is-info">
+                        <button
+                          onClick={() => {
+                            onTotal(f, this.state.quantity);
+                          }}
+                          type="submit"
+                          className="button is-info"
+                        >
                           +
                         </button>
                       </div>

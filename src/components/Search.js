@@ -9,7 +9,7 @@ class Search extends Component {
           onChange={this.props.onSearch}
           //add onChange eventlistener here
           name="search"
-          class="input"
+          className="input"
           type="search"
           placeholder="Search a food"
         ></input>
