@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import data from './foods.json';
 import FoodBox from './components/FoodBox';
 import AddForm from './components/AddForm';
-import Search from './components/Search';
 import Total from './components/Total';
 
 class App extends Component {
@@ -24,6 +22,7 @@ class App extends Component {
   handleAddFood = (food) => {
     this.setState({
       foods: [food, ...this.state.foods],
+      filteredBooks: [food, ...this.state.foods],
     });
   };
 
